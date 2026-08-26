@@ -1,7 +1,11 @@
 # PUColab
 
-**PUColab** é um protótipo de plataforma colaborativa para estudantes universitários compartilharem materiais de estudo e tirarem dúvidas por disciplina — uma espécie de "Reddit acadêmico", com upload de materiais, fóruns de discussão, votos e comentários, tudo organizado por matéria.
-
+**PUColab** é uma plataforma colaborativa pensada para estudantes da PUC compartilharem materiais de estudo, tirarem dúvidas em fóruns por disciplina e acompanharem horários de monitoria — uma espécie de "Reddit acadêmico" restrito à comunidade da universidade.
+ 
+Este repositório contém o **protótipo navegável em HTML/CSS/JS** (sem back-end).
+ 
+> Projeto acadêmico / protótipo de front-end: todos os dados são mantidos localmente no navegador (`localStorage`), sem persistência real compartilhada entre usuários.
+ 
 ---
 
 ## ✨ Funcionalidades
@@ -17,6 +21,42 @@
 - **Widgets** de destaque: matéria em destaque, top matérias e "sobre o projeto".
 - **Feedback visual** com toasts e modais para as ações principais.
 - **Layout responsivo** (menu lateral vira drawer no mobile).
+
+## 🧭 Visão completa do produto (conceito)
+ 
+Além do que já está no protótipo, o design do produto prevê um conjunto mais amplo de funcionalidades, pensadas para uma versão com back-end e usuários reais:
+ 
+**Acesso e identidade**
+- Login restrito com **matrícula da PUC**, para garantir que só membros da instituição usem a plataforma e reduzir contas falsas.
+- Senhas não são armazenadas, por segurança.
+- Perfil de usuário com foto e bio.
+- Contas de **professor** com permissões diferenciadas (podem solicitar remoção de material próprio publicado sem autorização).
+**Calendário de monitorias**
+- Monitores cadastram matéria, horário e sala de aula.
+- Calendário mensal — ao clicar em um dia, mostra as monitorias daquele dia.
+- Busca/seleção de disciplina específica (ex.: `CTC4002`) para filtrar o calendário só pelos horários daquela matéria.
+**Fóruns e posts**
+- Publicações podem ser feitas por qualquer membro da comunidade (aluno ou professor).
+- Lista de **fóruns acessados recentemente**.
+- Toda publicação tem área de comentários e pode ser votada (upvote/downvote) — posts com mais upvotes são mais recomendados.
+- Botão de **denúncia** em posts e comentários, para sinalizar conteúdo inadequado.
+- Possibilidade de **marcar/referenciar outros posts**, evitando reexplicar algo que já foi respondido.
+**Moderação e segurança**
+- Sistema de revisão antes da publicação: o post passa por um grupo de **moderadores escolhidos**, que avaliam o conteúdo.
+  - 3 avaliações positivas → post aprovado e publicado automaticamente.
+  - 3 avaliações negativas → post recusado.
+  - Prazo de até 24h para a revisão.
+- Comentários passam por verificação automática de uma IA (com botão de denúncia como reforço).
+- Arquivos e PDFs enviados passam por antivírus antes da publicação.
+- Conteúdo ofensivo (discurso de ódio, racismo, homofobia etc.) pode ser encaminhado à PUC para tratamento institucional.
+**Reputação — "Medalha de Honra"**
+- Usuários que contribuem constantemente com a comunidade ganham uma medalha, marcando-os como confiáveis.
+- Quem tem a medalha **pula a etapa de revisão/moderação** ao publicar.
+- A medalha aparece ao lado de postagens e comentários do usuário, para destaque.
+**Organização por trajetória acadêmica**
+- Seção de **"Matérias já cursadas"**, organizada por período, para o usuário revisitar conteúdo de disciplinas antigas.
+- **Busca de disciplinas** que o usuário ainda não cursa/não tem, permitindo conhecer ou ajudar em outras matérias.
+> As seções acima refletem o conceito de produto do FigJam e ainda **não estão implementadas** no protótipo HTML deste repositório — servem como roteiro para próximas iterações.
 
 ## 🖼️ Estrutura da interface
 
@@ -69,5 +109,5 @@ python3 -m http.server
 
 ## 📌 Status
 
-Protótipo funcional para fins de estudo/validação com usuários. Próximos passos possíveis: back-end real com persistência compartilhada, autenticação de usuários, upload de arquivos de fato, e moderação de conteúdo.
+Protótipo funcional para fins de estudo/validação com usuários, cobrindo o fluxo central de materiais e fóruns. As funcionalidades de identidade (login PUC), calendário de monitorias, moderação/revisão de posts, verificação por IA/antivírus e sistema de medalha de honra fazem parte do conceito de produto e são os próximos passos de desenvolvimento.
 
