@@ -2,7 +2,7 @@
 
 **PUColab** é uma plataforma colaborativa pensada para estudantes da PUC compartilharem materiais de estudo, tirarem dúvidas em fóruns por disciplina e acompanharem horários de monitoria — uma espécie de "Reddit acadêmico" restrito à comunidade da universidade.
  
-Este repositório contém o **protótipo navegável em HTML/CSS/JS** (sem back-end).
+Este repositório contém a **versão em Next.js + Tailwind** (pasta `puccolab/`) e o **protótipo navegável original em HTML/CSS/JS** (`PUColab.html`), ambos sem back-end.
  
 > Projeto acadêmico / protótipo de front-end: todos os dados são mantidos localmente no navegador (`localStorage`), sem persistência real compartilhada entre usuários.
  
@@ -69,30 +69,70 @@ Layout em três colunas, no estilo Reddit / Stack Overflow:
 
 ## 🛠️ Tecnologias
 
-Atualmente conta com o uso de:
+Versão Next.js (`puccolab/`):
 
-- **HTML5** 
-- **CSS**
-- **JavaScript**
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS 4**
+- **Zustand** (estado global, persistido no `localStorage`)
+- **lucide-react** (ícones)
+
+Protótipo original (`PUColab.html`):
+
+- **HTML5**, **CSS** e **JavaScript**
 - Fontes: [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk), [Work Sans](https://fonts.google.com/specimen/Work+Sans) e [IBM Plex Mono](https://fonts.google.com/specimen/IBM+Plex+Mono) (Google Fonts)
 
 ## 🚀 Como rodar
 
-Como é um único arquivo HTML autocontido, não há dependências nem processo de build:
+O repositório tem duas versões do PUColab:
+
+| Pasta / arquivo | O que é |
+|---|---|
+| `puccolab/` | **Versão nova** em Next.js (App Router) + Tailwind CSS 4 + TypeScript + Zustand |
+| `PUColab.html` | Protótipo original em um único HTML (mantido como referência) |
+
+### Versão Next.js (`puccolab/`)
+
+Pré-requisito: **Node.js 20.9 ou mais recente** (`node -v` pra conferir).
 
 ```bash
-# clone o repositório
-git clone https://github.com/seu-usuario/puclab.git
-cd puclab
-
-# basta abrir o arquivo no navegador
-open puclab.html   # macOS
-# ou
-xdg-open puclab.html   # Linux
-# ou apenas dê duplo clique no arquivo no explorador de arquivos
+git clone https://github.com/AndreyCoosta/PUColab.git
+cd PUColab/puccolab
+npm install
+npm run dev
 ```
 
-Como alternativa, sirva com qualquer servidor estático (recomendado para evitar restrições de `localStorage`/CORS em alguns navegadores):
+Depois abra <http://localhost:3000>.
+
+Outros comandos (rodar dentro de `puccolab/`):
+
+```bash
+npm run build   # gera a versão de produção
+npm run start   # sobe a versão de produção (depois do build)
+npm run lint    # verifica o código com o ESLint
+```
+
+Estrutura principal:
+
+```
+puccolab/src/
+├── app/                   # rotas (App Router)
+│   ├── page.tsx           # /                  → feed
+│   ├── materias/          # /materias          → todas as matérias
+│   │   └── [code]/        # /materias/INF1010  → página da matéria
+│   ├── material/[id]/     # /material/m1       → detalhe do material
+│   ├── post/[id]/         # /post/p1           → detalhe do fórum
+│   ├── layout.tsx         # topbar + sidebars + modal (fontes via next/font)
+│   └── globals.css        # tema do Tailwind (cores e fontes do protótipo)
+├── components/            # Topbar, Sidebars, ItemCard, ItemDetail, SubmitModal...
+├── lib/                   # types.ts, data.ts (dados seed), utils.ts
+└── store/                 # useStore (dados, salvos no localStorage) e useUI (busca, filtros, modal, toast)
+```
+
+Os dados continuam só no navegador (`localStorage`, chave `puccolab`). Para voltar aos dados de exemplo, apague essa chave no DevTools (Application → Local Storage).
+
+### Protótipo HTML (`PUColab.html`)
+
+Não tem dependências nem build: basta abrir o arquivo no navegador (duplo clique) ou servir a pasta:
 
 ```bash
 npx serve .
